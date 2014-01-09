@@ -9,8 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
+import android.widget.TextView;
 
 public class HomeActivity  extends FragmentActivity implements TabHost.OnTabChangeListener {
  
@@ -153,11 +155,20 @@ public class HomeActivity  extends FragmentActivity implements TabHost.OnTabChan
         }
     }
     public static void setTabColor(TabHost tabhost) {
-        for(int i=0;i<tabhost.getTabWidget().getChildCount();i++)
+    	String strColor = "#bffc8d";
+    	String strColor1 = "#FFFFFF";
+    	for(int i=0;i<tabhost.getTabWidget().getChildCount();i++)
         {
             tabhost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#039E79")); //unselected
+            RelativeLayout relLayout = (RelativeLayout)tabhost.getTabWidget().getChildAt(i); 
+            TextView tv = (TextView)relLayout.getChildAt(1); 
+            tv.setTextSize(30);
+            tv.setTextColor(Color.parseColor(strColor));
         }
         tabhost.getTabWidget().getChildAt(tabhost.getCurrentTab()).setBackgroundColor(Color.parseColor("#538477")); // selected
-        
+        RelativeLayout relLayout = (RelativeLayout)tabhost.getTabWidget().getChildAt(tabhost.getCurrentTab()); 
+        TextView tv1 = (TextView)relLayout.getChildAt(1); 
+        tv1.setTextSize(30);
+        tv1.setTextColor(Color.parseColor(strColor1));
     }
 }
