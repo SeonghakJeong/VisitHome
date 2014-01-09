@@ -35,7 +35,7 @@ public class VisitFragment extends Fragment {
 		VisitFriendButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(getActivity(), ShopActivity.class);
+				Intent intent = new Intent(getActivity(), FriendHomeActivity.class);
 				getActivity().startActivity(intent);
 
 			}
@@ -44,8 +44,15 @@ public class VisitFragment extends Fragment {
 		myHomeButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(getActivity(), ShopActivity.class);
-				getActivity().startActivity(intent);
+				
+				////////////////////////////
+				((HomeActivity) getActivity()).onTabChanged("Tab1");
+				((HomeActivity) getActivity()).mTabHost.setCurrentTabByTag("Tab1");
+				//etActivity().getSupportFragmentManager().findFragmentByTag("Tab1");
+				//getActivity().getSupportFragmentManager().executePendingTransactions();
+				
+				//Intent intent = new Intent(getActivity(), ShopActivity.class);
+				//getActivity().startActivity(intent);
 
 			}
 		});

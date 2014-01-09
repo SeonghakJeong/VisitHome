@@ -2,23 +2,21 @@ package com.example.visithome;
 
 import java.util.HashMap;
 
-
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Menu;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
 
 public class HomeActivity  extends FragmentActivity implements TabHost.OnTabChangeListener {
  
-    private TabHost mTabHost;
-    private HashMap mapTabInfo = new HashMap();
-    private TabInfo mLastTab = null;
+    public TabHost mTabHost;
+    public HashMap mapTabInfo = new HashMap();
+    public TabInfo mLastTab = null;
  
     private class TabInfo {
          private String tag;
@@ -29,6 +27,7 @@ public class HomeActivity  extends FragmentActivity implements TabHost.OnTabChan
              this.tag = tag;
              this.clss = clazz;
              this.args = args;
+             
          }
  
     }
@@ -63,6 +62,8 @@ public class HomeActivity  extends FragmentActivity implements TabHost.OnTabChan
         // Step 1: Inflate layout
         setContentView(R.layout.homelayout);
         // Step 2: Setup TabHost
+        //mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
+        
         initialiseTabHost(savedInstanceState);
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
@@ -92,7 +93,7 @@ public class HomeActivity  extends FragmentActivity implements TabHost.OnTabChan
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
         // Default to first tab
         this.onTabChanged("Tab1");
-        //
+        //mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
         mTabHost.setOnTabChangedListener(this);
     }
  
@@ -147,7 +148,16 @@ public class HomeActivity  extends FragmentActivity implements TabHost.OnTabChan
             mLastTab = newTab;
             ft.commit();
             this.getSupportFragmentManager().executePendingTransactions();
+            setTabColor(mTabHost);
+            
         }
     }
- 
+    public static void setTabColor(TabHost tabhost) {
+        for(int i=0;i<tabhost.getTabWidget().getChildCount();i++)
+        {
+            tabhost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#039E79")); //unselected
+        }
+        tabhost.getTabWidget().getChildAt(tabhost.getCurrentTab()).setBackgroundColor(Color.parseColor("#538477")); // selected
+        
+    }
 }
